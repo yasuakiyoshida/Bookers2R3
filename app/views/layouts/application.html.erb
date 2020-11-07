@@ -12,7 +12,7 @@
   <body>
     <% if user_signed_in? %><!-- ログイン後 -->
       <li>
-        <%= link_to "Home", user_path(@user) %>
+        <%= link_to "Home", user_path(current_user.id) %> <!-- 現在ログインしているユーザー（マイページ）へのリンク -->
       </li>
       <li>
         <%= link_to "Users", users_path %>

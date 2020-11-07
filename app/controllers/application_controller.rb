@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   
   def after_sign_in_path_for(resource)
-    user_path(@user) # ログイン後はユーザー詳細ページに
+    user_path(current_user.id) # ログイン後はマイページ（現在ログインしているユーザーのページに
   end
 
   protected # ストロングパラメータ（他のコントローラも参照可）
