@@ -1,1 +1,10 @@
 <h1>book show</h1>
+<div class="book-body">
+  <p></p><br>
+  <p></p>
+  <p>Title：<%= @book.title %></p>
+  <p>Opinion：<%= @book.body %></p>
+  <% if @book.user == current_user %> <!-- もし、投稿者 == 現在ログインしているユーザ だったら -->
+    <%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に削除しますか？"  %>
+  <% end %>
+</div>
