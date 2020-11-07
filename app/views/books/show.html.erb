@@ -1,6 +1,6 @@
 <h1>book show</h1>
 <div class="book-body">
-  <p></p><br>
+  <%= attachment_image_tag user.book, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
   <p></p>
   <p>Title：<%= @book.title %></p>
   <p>Opinion：<%= @book.body %></p>

@@ -7,5 +7,5 @@ Rails.application.routes.draw do
       get 'about'
     end
   end
-  resources :users, only: [:edit, :show]
+  resources :users, only: [:edit, :show, :update]
 end
