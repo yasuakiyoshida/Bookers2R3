@@ -7,7 +7,8 @@ class ApplicationController < ActionController::Base
 
   protected # ストロングパラメータ（他のコントローラも参照可）
 
-  def configure_permitted_parameters # sign up画面で追加したnameデータの操作許可
+  def configure_permitted_parameters # sign up,sign画面で追加したnameデータの操作許可
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:name])
   end
 end
