@@ -1,14 +1,15 @@
 class UsersController < ApplicationController
   
-  def create
-  end
-
   def index
+    @user = current_user # 部分テンプレートのマイページを表示するため
+    @book = Book.new # フォーム用の空モデルを生成し、books_controllerのcreateアクションに渡す
     @users = User.all
   end
   
   def show
     @user = User.find(params[:id]) # ユーザーのデータを1件取得
+    @books = @user.books # ユーザー詳細画面でログインユーザーの投稿一覧を表示するために必要
+    @book = Book.new # フォーム用の空モデルを生成し、books_controllerのcreateアクションに渡す
   end
   
   def edit

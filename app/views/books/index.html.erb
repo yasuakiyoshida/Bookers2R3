@@ -1,18 +1,38 @@
-<h1>book index</h1>
-<h1>New book</h1>
-<%= form_with model: @book, local:true do |f| %>
-  <h4>Title</h4>
-  <%= f.text_field :title %>
-  <h4>Opinion</h4>
-  <%= f.text_area :body %>
-  <%= f.submit 'Create Book' %>
-<% end %>
-
-<h1>Books</h1>
-<% @books.each do |book| %>
-<div>
-  <p></p>
-  <p>Title：<%= book.title %></p>
-  <p>Opinion：<%= book.body %></p>
-</div>
-<% end %>
+<main>
+  <p id = "notice"><%= notice %></p>
+  <div class = "container px-sm-0">
+    <div class = "row">
+      <%= render 'users/form', user: @user, book: @book %>
+      <div class = "col-md-8 offset-md-1">
+        <h2>Books</h2>
+        <table class = "table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Title</th>
+              <th>Opinion</th>
+              <th colspan = "3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @books.each do |book| %>
+            <tr>
+              <td>
+                <%= link_to user_path(book.user) do %> <!-- その投稿に関連したユーザーのページに遷移 -->
+                  <%= attachment_image_tag book.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to book_path(book) do %>
+                  <%= book.title %>
+                <% end %>
+              </td>
+              <td><%= book.body %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>

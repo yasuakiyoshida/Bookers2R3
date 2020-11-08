@@ -10,18 +10,25 @@ class BooksController < ApplicationController
   def index
     @book = Book.new # 投稿フォーム用に空のインスタンスを渡す
     @books = Book.all
+    @user = current_user # 部分テンプレートのマイページを表示するため
+    @users = User.all # 投稿一覧を表示するため（投稿者の画像と名前
   end
 
   def show
+    @user = current_user # 投稿詳細ページのユーザー画像と名前を表示するために必要
     @book_new = Book.new # 投稿フォーム用に空のインスタンスを渡す
     # ↑@bookにすると、その後find(params[:id])で値が取得されてしまいform_withがupdateになるためインスタンス名を値を取得するものとは別にする
     @book = Book.find(params[:id])
   end
   
   def edit
+    @book = Book.find(params[:id])
   end
 
   def update
+    @book = Book.find(params[:id])
+    @book.update(book_params)
+    redirect_to book_path(@book.id)
   end
   
   def destroy
