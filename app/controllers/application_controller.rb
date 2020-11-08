@@ -4,11 +4,18 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     user_path(current_user.id) # ログイン後はマイページ（現在ログインしているユーザーのページに
   end
+  
+  def after_sign_in_path_for(resource)
+    user_path(current_user.id) # ログイン後に遷移するpathを設定
+  end
+  
+  def after_sign_out_path_for(resource)
+    root_path # ログアウト後に遷移するpathを設定
+  end
 
   protected # ストロングパラメータ（他のコントローラも参照可）
 
   def configure_permitted_parameters # sign up,sign画面で追加したnameデータの操作許可
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-    devise_parameter_sanitizer.permit(:sign_in, keys: [:name])
   end
 end
