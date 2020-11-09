@@ -2,15 +2,15 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit] # 編集画面へのアクセス制限
   
   def index
-    @user = current_user # 部分テンプレートのマイページを表示するため
-    @book = Book.new # フォーム用の空モデルを生成し、books_controllerのcreateアクションに渡す
+    @user = current_user # 部分テンプレートのマイページを表示するため,ユーザー一覧はログインユーザー情報しか表示しない
+    @book = Book.new # フォーム用の空モデルを生成し、form_withを経て、books_controllerのcreateアクションに渡す
     @users = User.all
   end
   
   def show
     @user = User.find(params[:id]) # ユーザーのデータを1件取得
-    @books = @user.books # ユーザー詳細画面でログインユーザーの投稿一覧を表示するために必要
-    @book = Book.new # フォーム用の空モデルを生成し、books_controllerのcreateアクションに渡す
+    @books = @user.books # 上の@userで取得したユーザーに関連する投稿データを取得する
+    @book = Book.new # フォーム用の空モデルを生成し、form_withを経て、books_controllerのcreateアクションに渡す
   end
   
   def edit
