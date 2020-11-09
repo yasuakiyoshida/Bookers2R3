@@ -7,7 +7,9 @@ class BooksController < ApplicationController
       flash[:notice] = "You have created book successfully."
       redirect_to book_path(@book) # 投稿詳細ページにリダイレクト
     else
-      render :index
+      @books = Book.all # 投稿一覧を表示
+      @user = current_user # 部分テンプレートのマイページを表示するため
+      render 'books/index'
     end
   end
   
@@ -15,7 +17,6 @@ class BooksController < ApplicationController
     @book = Book.new # 投稿フォーム用に空のインスタンスを渡す
     @books = Book.all
     @user = current_user # 部分テンプレートのマイページを表示するため
-    @users = User.all # 投稿一覧を表示するため（投稿者の画像と名前
   end
 
   def show

@@ -1,7 +1,7 @@
 <main>
   <p id = "notice"><%= notice %></p>
   <div class = "container px-sm-0">
-    <div class = "row">
+    <!-- 部分テンプレートでここにrowがある-->
       <%= render 'users/form', user: @user, book: @book %>
       <div class = "col-md-8 offset-md-1">
         <h2>Users</h2>
@@ -24,6 +24,6 @@
           </tbody>
         </table>
       </div>
-    </div>
+    </div><!-- rowのdiv -->
   </div>
 </main>
