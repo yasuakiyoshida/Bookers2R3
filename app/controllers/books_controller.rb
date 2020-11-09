@@ -3,10 +3,14 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params) # 投稿データを取得
     @book.user_id = current_user.id # Bookモデルのuser_idカラムに現在ログインしているユーザーのidを取得
-    @book.save
-    redirect_to book_path(@book) # 投稿詳細ページにリダイレクト
+    if @book.save
+      flash[:notice] = "You have created book successfully."
+      redirect_to book_path(@book) # 投稿詳細ページにリダイレクト
+    else
+      render :index
+    end
   end
-
+  
   def index
     @book = Book.new # 投稿フォーム用に空のインスタンスを渡す
     @books = Book.all
@@ -27,8 +31,12 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    @book.update(book_params)
-    redirect_to book_path(@book.id)
+    if @book.update(book_params)
+      flash[:notice] = "You have updated book successfully."
+      redirect_to book_path(@book.id)
+    else
+      render :edit
+    end
   end
   
   def destroy
