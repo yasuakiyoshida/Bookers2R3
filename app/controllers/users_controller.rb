@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :correct_user, only: [:edit] # 編集画面へのアクセス制限
   
   def index
     @user = current_user # 部分テンプレートのマイページを表示するため
@@ -26,13 +27,16 @@ class UsersController < ApplicationController
     end
   end
   
-  def destroy
-  end
-  
   private
 
   def user_params
     params.require(:user).permit(:name, :introduction, :profile_image)
   end
-
+  
+  def correct_user #プロフィールのユーザーと現在ログインしているユーザーが一致しているか比較するメソッド
+    @user = User.find(params[:id]) #ユーザーIDを取得
+    unless @user == current_user #プロフィールのユーザーと現在ログインしているユーザーが異なる場合
+      redirect_to user_path(current_user) #自分のプロフィール詳細へリダイレクト
+    end
+  end
 end

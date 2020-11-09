@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :ensure_correct_user, only:[:edit] # 編集画面へのアクセス制限
   
   def create
     @book = Book.new(book_params) # 投稿データを取得
@@ -51,5 +52,12 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :body)
+  end
+  
+  def ensure_correct_user #投稿したユーザーと現在ログインしているユーザーを比較するメソッド
+    @book = Book.find(params[:id]) #投稿を取得
+    unless @book.user == current_user #投稿したユーザーが現在ログインしているユーザーではない場合
+      redirect_to books_path #投稿一覧画面にリダイレクト
+    end
   end
 end
