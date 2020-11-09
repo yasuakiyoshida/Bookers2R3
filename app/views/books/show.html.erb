@@ -1,15 +1,15 @@
 <main>
   <p id = "notice"><%= notice %></p>
   <div class = "container">
-    <div class = "row">
-      <%= render 'users/form', user: @user, book: @book_new %>
+    <!-- 部分テンプレートでここにrowがある-->
+      <%= render 'users/form', user: @book.user, book: @book_new %><!-- サイドバーのプロフィール表示を投稿者にするため@book.userで紐づける
       <div class = "col-md-8 offset-md-1">
         <h2>Book detail</h2>
         <table class = "table">
           <tbody>
             <tr>
               <td>
-                <%= link_to user_path(@user) do %>
+                <%= link_to user_path(@book.user) do %><!-- 投稿したユーザーの詳細ページへ -->
                   <%= attachment_image_tag @book.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %><br>
                   <%= @book.user.name %>
                 <% end %>
@@ -28,6 +28,6 @@
           </tbody>
         </table>
       </div>
-    </div>
+    </div><!-- rowのdiv -->
   </div>
 </main>
