@@ -28,9 +28,23 @@
                 <% end %>
               </td>
               <td><%= book.body %></td>
-              <td></td>
+              <td>
+                <% if book.favorited_by?(current_user) %> <!-- 投稿に付けられた『いいね』に自分（ログインユーザー）が含まれているか -->
+                <p> <!-- 含まれている場合 -->
+                  <%= link_to book_favorites_path(book), method: :delete do %>
+                    ♥<%= book.favorites.count %> いいね
+                  <% end %>
+                </p>
+                <% else %>
+                <p> <!-- 含まれていない場合 -->
+                  <%= link_to book_favorites_path(book), method: :post do %>
+                    ♡<%= book.favorites.count %> いいね
+                  <% end %>
+                </p>
+                <% end %>
+              </td>
             </tr>
-            <% end %>
+          　<% end %>
           </tbody>
         </table>
       </div>
