@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'homes#top'
   resources :books, except: [:new] do
     resource :favorites, only: [:create, :destroy]
+    resource :book_comments, only: [:create, :destroy]
   end
   resources :homes, path: 'home', except: [:index, :create, :new, :edit, :show, :update, :destroy] do
     collection do
