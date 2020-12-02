@@ -7,7 +7,7 @@ class Book < ApplicationRecord
   
   has_many :favorites, dependent: :destroy
   
-  def favorited_by?(user) # ユーザーが『いいね』したかどうか
-    favorites.where(user_id: user_id).exists?
+  def favorited_by?(user) # 引数で渡されたユーザidがFavoritesテーブル内に存在（exists?）するかどうかを調べるメソッドを定義
+    favorites.where(user_id: user_id).exists? # モデル名.where(任意のカラム名: 格納されている値) user_idカラムの全レコードを検索し、user.idが含まれているか確認
   end
 end
