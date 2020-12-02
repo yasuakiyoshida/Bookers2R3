@@ -46,15 +46,15 @@
           </tbody>
         </table>
         <!-- コメント機能 -->
-        <div class="comments">
+        <div class="comments mb-3">
         <% @book.book_comments.each do |book_comment| %>
           <%= attachment_image_tag book_comment.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %><br>
           <%= book_comment.user.name %>
           <%= book_comment.comment %>
           <% if book_comment.user == current_user %>
-          <div class="comment-delete">
-            <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete %> <!-- 引数の順番に注意book/bookのid/comment/commentのid -->
-          </div>
+          <span class="comment-delete">
+            <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), class: "btn btn-sm btn-danger", method: :delete %> <!-- 引数の順番に注意book/bookのid/comment/commentのid -->
+          </span>
           <% end %><br>
         <% end %>
         </div>
