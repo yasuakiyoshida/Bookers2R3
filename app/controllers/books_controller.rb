@@ -24,6 +24,7 @@ class BooksController < ApplicationController
     @book_new = Book.new # 投稿フォーム用に空のインスタンスを渡す
     # ↑@bookにすると、その後find(params[:id])で値が取得されてしまいform_withがupdateになるためインスタンス名を値を取得するものとは別にする
     @book = Book.find(params[:id])
+    @book_comment = BookComment.new # コメント投稿用のインスタンス作成
   end
   
   def edit
