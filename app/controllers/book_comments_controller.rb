@@ -11,6 +11,8 @@ class BookCommentsController < ApplicationController
   end
   
   def destroy
+    BookComment.find_by(id: params[:id], book_id: params[:book_id]).destroy # パラメータ(id,book_id)で指定されたコメントと投稿を検索して削除(URLにidが2つ)
+    redirect_back fallback_location: @book.id
   end
   
   private
